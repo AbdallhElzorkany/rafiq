@@ -24,7 +24,6 @@ export default function SessionAttempt({
     values: typeof initialValues,
     formikHelpers: FormikHelpers<typeof initialValues>,
   ) => {
-    console.log(values);
     const formData = new FormData();
     formData.append("SessionId", values.sessionId);
     formData.append("Video", values.video as File);

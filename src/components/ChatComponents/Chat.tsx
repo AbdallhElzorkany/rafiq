@@ -6,6 +6,7 @@ import MessageComponent from "./Message";
 import { getInitials } from "../../lib/chatUtils";
 import { useAuth } from "../../contexts/AuthContext";
 import { useSignalR } from "../../hooks/useSignalR";
+import { useToast } from "../../hooks/useToast";
 
 const API_BASE =
   "https://rafiq-container-server.wittyhill-43579268.germanywestcentral.azurecontainerapps.io/api";
@@ -15,6 +16,7 @@ const PAGE_SIZE = 30;
 export default function Chat() {
   const { userId } = useParams();
   const { token, user: currentUser } = useAuth();
+  const { showToast } = useToast();
   const [newMessage, setNewMessage] = useState("");
   const [states, setStates] = useState<{
     messages: Message[];
@@ -196,7 +198,10 @@ export default function Chat() {
           behavior: "smooth",
         });
       }, 0);
-    } catch {
+    } catch (e){
+      if(e instanceof Error)
+      showToast(e.message, "error");
+
       // Optionally surface error; keeping current behavior minimal
     }
   };

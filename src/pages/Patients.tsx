@@ -10,7 +10,6 @@ import { useState, useMemo } from "react";
 import { type PatientCard as PatientCardInterface } from "../types/Patient";
 import PatientCard from "../components/PatientComponents/PatientCard";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Patients() {
@@ -23,10 +22,13 @@ export default function Patients() {
   } = useQuery({
     queryKey: ["patients"],
     queryFn: async () => {
-      const req = await axios.get(
+      const req = await fetch(
         `https://rafiq-container-server.wittyhill-43579268.germanywestcentral.azurecontainerapps.io/api/Specialist/${user?.id}/patients`,
       );
-      return req.data?.data;
+      if (req.status === 404) {
+        return [];
+      }
+      return (await req.json()).data || [];
     },
   });
   const filteredPatients = useMemo(() => {

@@ -33,7 +33,7 @@ export default function Specialist() {
   const specialist: Specialist = data;
 
   return (
-    <div className="bg-gray-50/30 pb-15 min-h-[calc(100vh-81px)]">
+    <div className="bg-gray-50/30 min-h-[calc(100vh-81px)]">
       {isFetching ? (
         <div className="flex flex-col items-center justify-center h-[calc(100vh-200px)]">
           <div className="mb-4 flex justify-center text-primary">
@@ -93,7 +93,7 @@ export default function Specialist() {
 
           {/* Info Card */}
 
-          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-6 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
               <BadgeInfo className="size-6 text-primary" />
               <h2 className="text-xl font-bold text-gray-900">Information</h2>
@@ -135,10 +135,10 @@ export default function Specialist() {
           </div>
           {(user?.specialistId === specialistId ||
             user?.specialistId === null) && (
-            <div className="fixed bottom-0 left-0 right-0 p-4.5 bg-white/80 backdrop-blur-md border-t border-gray-100 flex justify-center">
+            <div className="p-4.5 bg-white border-t border-gray-100 flex justify-center shadow-sm rounded-2xl">
               {user?.specialistId === specialistId ? (
                 <button
-                  className="w-full max-w-6xl lg:ml-[256px] cursor-pointer border-red-500 text-center hover:border-red-500 hover:bg-white hover:text-red-500  border-2 gap-2 bg-red-500 text-white py-[7px] px-8 rounded-2xl shadow-lg transition-all duration-300 text-lg"
+                  className="w-full  cursor-pointer border-red-500 text-center hover:border-red-500 hover:bg-white hover:text-red-500  border-2 gap-2 bg-red-500 text-white py-[7px] px-8 rounded-2xl shadow-lg transition-all duration-300 text-lg"
                   onClick={() => {
                     fetch(
                       `https://rafiq-container-server.wittyhill-43579268.germanywestcentral.azurecontainerapps.io/api/Specialist/${specialistId}/patients/${user?.patientId}`,
@@ -168,7 +168,7 @@ export default function Specialist() {
                 </button>
               ) : (
                 <button
-                  className="w-full max-w-6xl lg:ml-[256px] cursor-pointer border-primary text-center hover:border-primary hover:bg-white hover:text-primary  border-2 gap-2 bg-primary text-white py-[7px] px-8 rounded-2xl shadow-lg transition-all duration-300 text-lg"
+                  className="w-full  cursor-pointer border-primary text-center hover:border-primary hover:bg-white hover:text-primary  border-2 gap-2 bg-primary text-white py-[7px] px-8 rounded-2xl shadow-lg transition-all duration-300 text-lg"
                   onClick={() => {
                     fetch(
                       `https://rafiq-container-server.wittyhill-43579268.germanywestcentral.azurecontainerapps.io/api/Specialist/${specialistId}/patients/${user?.patientId}`,

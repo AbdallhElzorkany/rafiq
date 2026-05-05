@@ -50,7 +50,6 @@ export default function UpcomingSessions({ patientId }: { patientId: string }) {
         `${API_BASE_URL}/api/Session/patient/${patientId}/sessions?status=not-allowed`,
       );
       const res = await req.json();
-      console.log(res);
       return res;
     },
     enabled: !!patientId,

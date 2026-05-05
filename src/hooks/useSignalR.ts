@@ -30,10 +30,7 @@ export function useSignalR({
   }, [onError]);
 
   useEffect(() => {
-    if (!token) {
-      console.log("[SignalR] No token, skipping connection");
-      return;
-    }
+    if (!token) return;
 
     const hubUrl = `${API_BASE}/hub?access_token=${token}`;
     console.log("[SignalR] Connecting to:", hubUrl);
