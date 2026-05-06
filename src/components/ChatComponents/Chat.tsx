@@ -158,10 +158,10 @@ export default function Chat() {
     setStates((prev) => ({ ...prev, messages: [...prev.messages, message] }));
     setTimeout(() => {
       messagesContainerRef.current?.scrollTo({
-        top: messagesContainerRef.current?.scrollHeight + 100,
+        top: messagesContainerRef.current?.scrollHeight,
         behavior: "smooth",
       });
-    }, 0);
+    }, 50);
   }, []);
 
   useSignalR({
@@ -199,10 +199,10 @@ export default function Chat() {
       }));
       setTimeout(() => {
         messagesContainerRef.current?.scrollTo({
-          top: messagesContainerRef.current?.scrollHeight + 100,
+          top: messagesContainerRef.current?.scrollHeight,
           behavior: "smooth",
         });
-      }, 0);
+      }, 50);
     } catch (e) {
       if (e instanceof Error) showToast(e.message, "error");
 
