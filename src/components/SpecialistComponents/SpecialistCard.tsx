@@ -59,7 +59,7 @@ export default function SpecialistCard({
         <div className="flex items-center gap-2">
           <Link
             to={`/specialists/${specialist.id}`}
-            className="w-1/2 shadow-md border-primary text-center hover:border-primary hover:bg-white hover:text-primary transition-all duration-300 border-2 gap-2 bg-primary text-white px-6 py-4 rounded-2xl flex items-center justify-center"
+            className={`${user?.specialistId === specialist.id ? "w-1/2" : "w-full"} shadow-md border-primary text-center hover:border-primary hover:bg-white hover:text-primary transition-all duration-300 border-2 gap-2 bg-primary text-white px-6 py-4 rounded-2xl flex items-center justify-center`}
           >
             <Eye className="size-5" />
             Details
