@@ -246,7 +246,8 @@ export default function Chat() {
     }
     if (
       isFromMe &&
-      !lastMessage.isRead &&
+      lastMessage.isRead === false &&
+      conversation?.lastMessage.isRead === true &&
       conversation?.lastMessage.id === lastMessage.id
     ) {
       setStates((prev) => ({
