@@ -33,3 +33,10 @@ export interface Chat {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
 }
+
+export interface Contact {
+  id?: string;
+  fullName?: string;
+  familyId?: string;
+  familyName?: string;
+}
