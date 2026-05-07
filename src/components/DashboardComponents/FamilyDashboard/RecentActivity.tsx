@@ -1,11 +1,49 @@
 import { Clock, ChevronRight } from "lucide-react";
+import type { PatientProgressData } from "../../../types/PatientProgress";
 
-export default function RecentActivity() {
+interface RecentActivityProps {
+  progressData: PatientProgressData | null;
+  isLoading: boolean;
+}
+const CATEGORY_LABELS: Record<number, string> = {
+  1: "Speech",
+  2: "Social Skills",
+  3: "Cognitive Skills",
+};
+
+export default function RecentActivity({
+  progressData,
+  isLoading,
+}: RecentActivityProps) {
+  const topCategory = [...(progressData?.byCategory ?? [])].sort(
+    (a, b) => b.totalPoints - a.totalPoints,
+  )[0];
+
   const recentActivity = [
-    { icon: "✓", text: "Completed Motor Skills Session", time: "2 hours ago", color: "#10b981" },
-    { icon: "📊", text: "Weekly Progress Report Available", time: "5 hours ago", color: "#3b82f6" },
-    { icon: "🎯", text: "New Goal Achieved: Social Skills L5", time: "1 day ago", color: "#f59e0b" },
-    { icon: "📅", text: "Upcoming Session with Dr. Mitchell", time: "Tomorrow, 10:00 AM", color: "#8b5cf6" }
+    {
+      icon: "🎮",
+      text: `Total games played: ${progressData?.totalGamesPlayed ?? 0}`,
+      time: "Latest sync",
+      color: "#10b981",
+    },
+    {
+      icon: "⭐",
+      text: `Total points earned: ${progressData?.totalEarnedPoints ?? 0}`,
+      time: "Latest sync",
+      color: "#3b82f6",
+    },
+    {
+      icon: "🏆",
+      text: topCategory
+        ? `Top category: ${
+            topCategory.categoryName && topCategory.categoryName !== "Unknown"
+              ? topCategory.categoryName
+              : (CATEGORY_LABELS[topCategory.categoryId] ?? `Category ${topCategory.categoryId}`)
+          }`
+        : "Top category will appear after first game",
+      time: "Current status",
+      color: "#f59e0b",
+    },
   ];
 
   return (
@@ -15,6 +53,9 @@ export default function RecentActivity() {
         <h3 className="text-lg font-bold text-gray-900">Recent Activity</h3>
       </div>
       <div className="space-y-4">
+        {isLoading && (
+          <p className="text-sm text-gray-500">Refreshing progress activity...</p>
+        )}
         {recentActivity.map((activity, i) => (
           <div key={i} className="flex items-start gap-3 group cursor-pointer">
             <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg shrink-0" style={{ backgroundColor: `${activity.color}15` }}>
