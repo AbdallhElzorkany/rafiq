@@ -39,27 +39,49 @@ export function EditResourceForm({
 
   return (
     <div className="mb-4 p-4 bg-blue-50/50 rounded-xl border border-blue-100 space-y-3">
+      <label className="text-sm font-medium" htmlFor="title">
+        Title <span className="text-red-500">*</span>
+      </label>
       <input
+        id="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Resource title"
         className="w-full px-4 py-2 bg-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all shadow-sm"
       />
+      <label className="text-sm font-medium" htmlFor="link">
+        Link <span className="text-red-500">*</span>{" "}
+        <span className="text-xs font-normal text-gray-500">
+          (must start with &quot;https://&quot; or &quot;http://&quot;)
+        </span>
+      </label>
       <input
+        id="link"
         value={link}
         onChange={(e) => setLink(e.target.value)}
         placeholder="https://example.com"
         className="w-full px-4 py-2 bg-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all shadow-sm"
       />
+      <label className="text-sm font-medium" htmlFor="description">
+        Description <span className="text-red-500">*</span>
+      </label>
       <textarea
+        id="description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Describe this resource..."
         className="w-full px-4 py-3 bg-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all resize-none shadow-sm"
         rows={3}
       />
+      <label className="text-sm font-medium" htmlFor="tags">
+        Tags <span className="text-red-500">*</span>{" "}
+        <span className="text-xs font-normal text-gray-500">
+          (comma separated)
+        </span>
+      </label>
       <input
         type="text"
+        id="tags"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
         placeholder="Tags (comma separated)"
