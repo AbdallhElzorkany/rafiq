@@ -1,11 +1,25 @@
 import { Calendar, Zap, TrendingUp, Star, Users, Video } from 'lucide-react';
-
-interface WelcomeBannerProps {
+import { useAuth } from '../../../contexts/AuthContext';
+import { useQuery } from '@tanstack/react-query';interface WelcomeBannerProps {
   doctorName?: string;
   patientsCount?: number | null;
 }
 
 export default function WelcomeBanner({ doctorName, patientsCount }: WelcomeBannerProps) {
+  const { user } = useAuth();
+  
+  const { data } = useQuery({
+    queryKey: ["SpecialistSessions", user?.id],
+    staleTime: 0,
+    queryFn: () =>
+      fetch(
+        `https://rafiq-container-server.wittyhill-43579268.germanywestcentral.azurecontainerapps.io/api/Session/specialist/${user?.id}`
+      ).then((res) => res.json()),
+    enabled: !!user?.id,
+  });
+
+  const sessionsCount = data?.data?.[0]?.numberOfSessions || 0;
+
   const displayName = doctorName?.trim() || 'Doctor';
   const patientsLabel =
     patientsCount === null ? '—' : String(patientsCount);
@@ -28,7 +42,7 @@ export default function WelcomeBanner({ doctorName, patientsCount }: WelcomeBann
         </div>
         <h1 className="text-4xl font-black mb-3 tracking-tight">Welcome Dr. {displayName} 👋</h1>
         <p className="text-sm text-green-100/90 max-w-lg leading-relaxed">
-          You have <strong className="text-white font-bold">{patientsLabel} patients</strong> under active care and <strong className="text-white font-bold">3 new videos</strong> uploaded since your last login.
+          You have <strong className="text-white font-bold">{patientsLabel} patients</strong> under active care and <strong className="text-white font-bold">{sessionsCount} sessions</strong> uploaded.
         </p>
         <div className="flex items-center gap-2 mt-4">
           <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
@@ -54,8 +68,8 @@ export default function WelcomeBanner({ doctorName, patientsCount }: WelcomeBann
           <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
             <Video className="w-5 h-5" />
           </div>
-          <span className="text-3xl font-black mb-1">3</span>
-          <span className="text-[10px] text-green-100/80 text-center uppercase tracking-wider font-bold">New<br/>Sessions</span>
+          <span className="text-3xl font-black mb-1">{sessionsCount}</span>
+          <span className="text-[10px] text-green-100/80 text-center uppercase tracking-wider font-bold">Total<br/>Sessions</span>
         </div>
       </div>
     </div>

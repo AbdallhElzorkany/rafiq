@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import WelcomeBanner from "./SpecialistDashboard/WelcomeBanner";
-import Overview from "./SpecialistDashboard/Overview";
 import RecentSessions from "./SpecialistDashboard/RecentSessions";
 import MyPatients from "./SpecialistDashboard/MyPatients";
+import PendingAttemptReviews from "./SpecialistDashboard/PendingAttemptReviews";
 import { useAuth } from "../../contexts/AuthContext";
 import type { SpecialistApiResponse } from "../../types/Specialist";
 
@@ -71,8 +71,8 @@ export default function SpecialistDashboard() {
           doctorName={user?.username}
           patientsCount={patientsCount}
         />
-        <Overview />
         <div className="space-y-8">
+          <PendingAttemptReviews />
           <RecentSessions />
           <MyPatients />
         </div>

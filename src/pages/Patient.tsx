@@ -12,6 +12,7 @@ import {
 import { format, differenceInYears } from "date-fns";
 import { useMemo } from "react";
 import UpcomingSessions from "../components/PatientComponents/UpcomingSessions";
+import PatientAttempts from "../components/PatientComponents/PatientAttempts";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -206,8 +207,9 @@ export default function Patient() {
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 not-lg:order-2">
+        <div className="lg:col-span-2 not-lg:order-2 space-y-6">
           <UpcomingSessions patientId={patientId!} />
+          <PatientAttempts patientId={patientId!} />
         </div>
 
         {/* Sidebar */}
