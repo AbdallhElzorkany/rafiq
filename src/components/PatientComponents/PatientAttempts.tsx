@@ -101,17 +101,32 @@ function PendingActions({
 
   return (
     <div className="border-t border-amber-100 bg-amber-50/20 px-4 pb-4 pt-3 space-y-3">
-      {/* Video link */}
       {attempt.videoUrl && (
-        <a
-          href={attempt.videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-dark hover:underline"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-          Watch submitted video
-        </a>
+        <div>
+          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
+            Attempt recording
+          </p>
+          <div className="space-y-2">
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-black">
+              <video
+                className="w-full max-h-[min(360px,50vh)] object-contain bg-black"
+                controls
+                playsInline
+                preload="metadata"
+                src={attempt.videoUrl}
+              />
+            </div>
+            <a
+              href={attempt.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-dark hover:underline"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              Open in new tab
+            </a>
+          </div>
+        </div>
       )}
 
       {/* Step 1 — two action buttons */}
@@ -119,14 +134,14 @@ function PendingActions({
         <div className="flex gap-2">
           <button
             onClick={() => setDecision("Approved")}
-            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-green-600 text-white text-sm font-semibold hover:bg-green-700 active:scale-95 transition-all duration-200 shadow-sm shadow-green-200"
+            className="cursor-pointer flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-green-600 text-white text-sm font-semibold hover:bg-green-700 active:scale-95 transition-all duration-200 shadow-sm shadow-green-200"
           >
             <CheckCircle2 className="w-4 h-4" />
             Accept
           </button>
           <button
             onClick={() => setDecision("Rejected")}
-            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-red-500 text-white text-sm font-semibold hover:bg-red-600 active:scale-95 transition-all duration-200 shadow-sm shadow-red-200"
+            className="cursor-pointer flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-red-500 text-white text-sm font-semibold hover:bg-red-600 active:scale-95 transition-all duration-200 shadow-sm shadow-red-200"
           >
             <XCircle className="w-4 h-4" />
             Reject
@@ -196,7 +211,7 @@ function PendingActions({
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-sm font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm ${
+              className={`cursor-pointer flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-sm font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm ${
                 decision === "Approved"
                   ? "bg-green-600 hover:bg-green-700"
                   : "bg-red-500 hover:bg-red-600"
@@ -224,7 +239,7 @@ function PendingActions({
                 setScore("");
               }}
               disabled={isSubmitting}
-              className="px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-500 text-sm font-medium hover:bg-slate-50 transition-colors"
+              className="cursor-pointer px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-500 text-sm font-medium hover:bg-slate-50 transition-colors"
             >
               Back
             </button>
@@ -308,15 +323,31 @@ function AttemptCard({
       {!isPendingStatus && expanded && (
         <div className="border-t border-slate-100 px-4 pb-4 pt-3 space-y-3">
           {attempt.videoUrl && (
-            <a
-              href={attempt.videoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-dark hover:underline"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Watch video
-            </a>
+            <div>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
+                Attempt recording
+              </p>
+              <div className="space-y-2">
+                <div className="rounded-xl overflow-hidden border border-slate-200 bg-black">
+                  <video
+                    className="w-full max-h-[min(360px,50vh)] object-contain bg-black"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    src={attempt.videoUrl}
+                  />
+                </div>
+                <a
+                  href={attempt.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-dark hover:underline"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  Open in new tab
+                </a>
+              </div>
+            </div>
           )}
           <div className="space-y-2">
             {attempt.scoreAwarded != null && (
@@ -453,7 +484,7 @@ export default function PatientAttempts({
         </h2>
         <button
           onClick={() => void refetch()}
-          className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+          className="cursor-pointer p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
           title="Refresh"
         >
           <RefreshCw className="w-4 h-4" />
