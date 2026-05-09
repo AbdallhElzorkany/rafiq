@@ -397,6 +397,11 @@ export default function AppLayout() {
                                     {n.message}
                                   </p>
                                 ) : null}
+                                {n.doctorFeedback ? (
+                                  <p className="text-xs text-emerald-800 mt-1 line-clamp-2">
+                                    Doctor feedback: {n.doctorFeedback}
+                                  </p>
+                                ) : null}
                                 <p className="text-xs text-slate-400 mt-1.5">
                                   {formatNotificationRelativeTime(n.createdAt)}
                                 </p>

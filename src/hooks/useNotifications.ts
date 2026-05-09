@@ -5,13 +5,13 @@ import type { User } from "../contexts/AuthContext";
 const API_BASE =
   "https://rafiq-container-server.wittyhill-43579268.germanywestcentral.azurecontainerapps.io/api";
 
-/** How often to poll the API for new notifications (ms). Change to e.g. 60_000 for once per minute. */
 const NOTIFICATIONS_POLL_MS = 30_000;
 
 export interface Notification {
   id: number;
   title: string;
   message: string;
+  doctorFeedback?: string;
   type: string;
   isRead: boolean;
   createdAt: string;
@@ -34,17 +34,53 @@ function parsePayload(payload: unknown): Record<string, unknown> | null {
   return null;
 }
 
+function readStringField(
+  source: Record<string, unknown>,
+  keys: string[],
+): string | undefined {
+  for (const key of keys) {
+    const value = source[key];
+    if (typeof value === "string" && value.trim()) {
+      return value.trim();
+    }
+  }
+  return undefined;
+}
+
+function extractDoctorFeedback(
+  raw: Record<string, unknown>,
+  payloadData: Record<string, unknown> | null,
+): string | undefined {
+  const feedbackKeys = [
+    "doctorFeedback",
+    "feedback",
+    "specialistFeedback",
+    "reviewNotes",
+    "notes",
+    "comment",
+  ];
+
+  if (payloadData) {
+    const fromPayload = readStringField(payloadData, feedbackKeys);
+    if (fromPayload) return fromPayload;
+  }
+
+  return readStringField(raw, feedbackKeys);
+}
+
 export function normalizeNotification(raw: Record<string, unknown>): Notification {
   const typeRaw =
     raw.typeOfNotification ?? raw.typeofNotification ?? raw.type ?? "";
+  const payloadData = parsePayload(raw.payload);
   return {
     id: Number(raw.id),
     title: String(raw.title ?? ""),
     message: String(raw.message ?? ""),
+    doctorFeedback: extractDoctorFeedback(raw, payloadData),
     type: String(typeRaw),
     isRead: Boolean(raw.isRead),
     createdAt: String(raw.createdAt ?? ""),
-    payloadData: parsePayload(raw.payload),
+    payloadData,
   };
 }
 

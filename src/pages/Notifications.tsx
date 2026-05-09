@@ -133,6 +133,16 @@ function NotificationCard({
             {notification.message}
           </p>
         )}
+        {notification.doctorFeedback && (
+          <div className="mt-2 rounded-lg border border-emerald-100 bg-emerald-50/60 px-2.5 py-2">
+            <p className="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold">
+              Doctor feedback
+            </p>
+            <p className="text-xs text-emerald-900 mt-0.5 leading-relaxed">
+              {notification.doctorFeedback}
+            </p>
+          </div>
+        )}
         {notification.type && (
           <span className="inline-block mt-2 text-[10px] font-medium uppercase tracking-wide px-2 py-0.5 rounded-full bg-slate-100 text-primary-dark/70">
             {notification.type.replace(/([A-Z])/g, " $1").trim()}
