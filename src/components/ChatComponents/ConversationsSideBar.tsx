@@ -127,7 +127,9 @@ export default function ConversationsSideBar({
       >
         {/* Header */}
         <div className="p-4 border-b border-gray-100">
-          <div className="flex items-center justify-between mb-4">
+          <div
+            className={`flex items-center justify-between ${!newChat && "mb-4"}`}
+          >
             <h2 className="text-xl font-bold text-gray-800 ">
               {newChat ? "New Chat" : "Chats"}
             </h2>
@@ -156,19 +158,21 @@ export default function ConversationsSideBar({
           </div>
 
           {/* Search */}
-          <div className="relative">
-            <Search
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-              size={18}
-            />
-            <input
-              type="text"
-              placeholder="Search conversations..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pr-10 pl-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-            />
-          </div>
+          {!newChat && (
+            <div className="relative">
+              <Search
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                size={18}
+              />
+              <input
+                type="text"
+                placeholder="Search chats..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pr-10 pl-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              />
+            </div>
+          )}
         </div>
 
         {/* Conversations List */}
