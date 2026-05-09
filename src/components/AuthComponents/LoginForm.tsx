@@ -70,7 +70,7 @@ export default function LoginForm() {
           const responseData = responseBody.data;
 
           if (responseData.isAuthenticated) {
-            login(responseData, responseData.token, responseData.refreshToken);
+            login(responseData);
 
             console.log("Login success:", responseBody);
 
