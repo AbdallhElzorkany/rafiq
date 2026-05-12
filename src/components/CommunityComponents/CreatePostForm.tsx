@@ -252,7 +252,7 @@ export function CreatePostForm() {
                             values.tags.filter((t) => t !== tag),
                           )
                         }
-                        className="p-0.5 hover:bg-primary/20 rounded-full transition-colors"
+                        className="p-0.5 cursor-pointer hover:bg-primary/20 rounded-full transition-colors"
                       >
                         <X className="w-3 h-3" />
                       </button>
