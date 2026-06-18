@@ -6,14 +6,14 @@ const Player = createPlayer({ features: videoFeatures });
 
 interface MediaPlayerProps {
   src: string;
-  poster: string;
+  poster?: string;
 }
 
 export const MediaPlayer = ({ src, poster }: MediaPlayerProps) => {
   return (
     <Player.Provider>
       <VideoSkin poster={poster}>
-        <Video src={src} playsInline />
+        <Video src={src} playsInline  />
       </VideoSkin>
     </Player.Provider>
   );

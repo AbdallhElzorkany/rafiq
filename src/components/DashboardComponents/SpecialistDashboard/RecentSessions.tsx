@@ -8,7 +8,7 @@ import {
   Users,
   Eye,
 } from "lucide-react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 
 interface SessionItem {
@@ -162,7 +162,7 @@ export default function RecentSessions() {
 
         {!isLoading && !error && featuredSession && (
           <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6 mb-6">
-            <div className="relative group cursor-pointer">
+            <Link to={`/sessions/${featuredSession.id}`} className="relative group cursor-pointer">
               <img
                 src={featuredSession.thumbnailUrl || FALLBACK_THUMBNAIL}
                 alt={featuredSession.title}
@@ -173,7 +173,7 @@ export default function RecentSessions() {
                   <Play className="w-8 h-8 text-green-600 ml-1" />
                 </div>
               </div>
-            </div>
+            </Link>
             <div className="flex flex-col justify-center flex-1 py-2 w-full relative">
               <div className="flex items-center gap-2 mb-3">
                 <span className="flex items-center gap-1.5 text-xs font-bold text-green-600 bg-green-50 px-3 py-1.5 rounded-full tracking-wide">
@@ -181,7 +181,7 @@ export default function RecentSessions() {
                 </span>
                 <span className="flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full tracking-wide text-center">
                   <Clock className="w-3.5 h-3.5" />{" "}
-                  {featuredSession.duration || "N/A"}
+                  {featuredSession.duration.split(".")[0].substring(3) || "N/A"}
                 </span>
               </div>
               <h3 className="text-2xl font-black text-gray-900 mb-2">
@@ -211,7 +211,7 @@ export default function RecentSessions() {
         {!isLoading && !error && featuredSession && (
           <div className="space-y-3">
             {otherSessions.map((session) => (
-              <div
+              <Link to={`/sessions/${session.id}`}
                 key={session.id}
                 className="flex flex-col md:flex-row items-center md:items-stretch justify-between p-4 border border-gray-100 rounded-2xl hover:bg-gray-50/80 hover:border-gray-200 transition-all shadow-sm hover:shadow-md group cursor-pointer"
               >
@@ -223,7 +223,8 @@ export default function RecentSessions() {
                       alt={session.title}
                     />
                     <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {session.duration || "N/A"}
+                      <Clock className="w-3 h-3" />{" "}
+                      {session.duration.split(".")[0].substring(3) || "N/A"}
                     </div>
                     <div className="absolute inset-0 bg-black/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <Play className="w-6 h-6 text-white" />
@@ -250,7 +251,7 @@ export default function RecentSessions() {
                     <span className="text-gray-500 font-medium">score</span>
                   </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

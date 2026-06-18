@@ -6,7 +6,7 @@ import {
   Users,
   User,
   LogOut,
-  Settings,
+  // Settings,
   Bell,
   Stethoscope,
   Joystick,
@@ -18,7 +18,7 @@ import {
   ChevronRight,
   ChevronLeft,
   Sparkles,
-  MessagesSquare
+  MessagesSquare,
 } from "lucide-react";
 import { NavLink, useLocation, Link, useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
@@ -72,9 +72,9 @@ export default function AppLayout() {
     { icon: BotMessageSquare, label: "AI Assistant", href: "/ai-assistant" },
     { icon: MessageCircle, label: "Community", href: "/community" },
     { icon: MessagesSquare, label: "Chats", href: "/chats" },
-    { icon: Joystick, label: "Games", href: "/games" },
+    ...(isFamily ? [{ icon: Joystick, label: "Games", href: "/games" }] : []),
     { icon: Library, label: "Resources", href: "/resources" },
-    { icon: Settings, label: "Settings", href: "/settings" },
+    // { icon: Settings, label: "Settings", href: "/settings" },
   ];
 
   const previewNotifications = apiNotifications.slice(0, 8);
@@ -165,9 +165,7 @@ export default function AppLayout() {
                           } ${sidebarCollapsed ? "h-10 w-10" : "h-9 w-9"}`}
                         >
                           <item.icon
-                            className={
-                              sidebarCollapsed ? "size-5" : "size-4.5"
-                            }
+                            className={sidebarCollapsed ? "size-5" : "size-4.5"}
                             strokeWidth={2}
                           />
                         </div>
@@ -355,7 +353,8 @@ export default function AppLayout() {
                         </div>
                       </div>
                       <div className="max-h-80 overflow-y-auto">
-                        {notificationsLoading && previewNotifications.length === 0 ? (
+                        {notificationsLoading &&
+                        previewNotifications.length === 0 ? (
                           <div className="p-3 space-y-2">
                             {[1, 2, 3].map((i) => (
                               <div

@@ -9,7 +9,7 @@ import WelcomeBanner from "./FamilyDashboard/WelcomeBanner";
 import SpecialistDetailsCard from "./FamilyDashboard/SpecialistDetailsCard";
 import SkillsProgress from "./FamilyDashboard/SkillsProgress";
 import ProgressChart from "./FamilyDashboard/ProgressChart";
-import RecentActivity from "./FamilyDashboard/RecentActivity";
+// import RecentActivity from "./FamilyDashboard/RecentActivity";
 import Milestones from "./FamilyDashboard/Milestones";
 
 const API_BASE =
@@ -165,10 +165,10 @@ export default function FamilyDashboard() {
         </div>
 
         <div className="space-y-6">
-          <RecentActivity
+          {/* <RecentActivity
             progressData={progressData}
             isLoading={isLoadingProgress}
-          />
+          /> */}
           <Milestones
             progressData={progressData}
             isLoading={isLoadingProgress}

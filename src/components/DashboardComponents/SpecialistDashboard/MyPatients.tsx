@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Users, ChevronRight, Mail, CalendarDays } from "lucide-react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 
 interface SpecialistPatient {
@@ -147,7 +147,7 @@ export default function MyPatients() {
       {!isLoading && !error && patients.length > 0 && (
         <div className="space-y-4">
           {patients.map((patient) => (
-            <div
+            <Link to={`/patients/${patient.patientId}`} 
               key={patient.patientId}
               className="flex items-center gap-6 p-3 rounded-xl hover:bg-gray-50 transition-all group cursor-pointer border border-transparent hover:border-gray-100"
             >
@@ -187,7 +187,7 @@ export default function MyPatients() {
                   ></div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

@@ -31,7 +31,7 @@ import Resources from "./pages/Resources.tsx";
 import Chats from "./pages/Chats.tsx";
 import Notifications from "./pages/Notifications.tsx";
 import Games from "./pages/Games.tsx";
-import Settings from "./pages/Settings.tsx";
+// import Settings from "./pages/Settings.tsx";
 
 const router = createBrowserRouter([
   {
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
           { path: "resources", element: <Resources /> },
           { path: "notifications", element: <Notifications /> },
           { path: "games", element: <Games /> },
-          { path: "settings", element: <Settings /> },
+          // { path: "settings", element: <Settings /> },
           {
             path: "chats",
             element: <Chats />,
