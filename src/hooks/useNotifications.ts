@@ -125,6 +125,7 @@ function normalizeUnreadCount(data: unknown): number {
 export function formatNotificationRelativeTime(dateStr: string): string {
   if (!dateStr) return "";
   const date = new Date(dateStr);
+  date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
   const diffMins = Math.floor(diffMs / 60_000);
