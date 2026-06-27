@@ -71,3 +71,17 @@ body {
     transform: translateX(100%);
   }
 }
+::-webkit-scrollbar {
+  width: 7.5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-dark);
+  border-radius:0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
