@@ -1,19 +1,57 @@
 import { X, Menu } from "lucide-react";
-import { useState } from "react";
-import { NavLink, Link } from "react-router";
-
+import { useState,useEffect } from "react";
+import { Link } from "react-router";
+const navItems = [
+  { label: "Home", id: "home" },
+  { label: "Services", id: "services" },
+  { label: "Care", id: "care" },
+  { label: "Activities", id: "activities" },
+  { label: "Get Started", id: "get-started" },
+];
 export default function HomeNavBar(){
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const navItems = [
-      { label: "Home", id: "" },
-      { label: "Services", id: "services" },
-      { label: "Care", id: "care" },
-      { label: "Activities", id: "activities" },
-    ];
+const [activeSection, setActiveSection] = useState("home");
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const [isScrolled, setIsScrolled] = useState(false);
+
+const scrollToSection = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+  setIsMobileMenuOpen(false);
+};
+
+useEffect(() => {
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 50);
+
+    const sections = navItems.map((item) => document.getElementById(item.id));
+    const scrollPosition = window.scrollY + 100;
+
+    sections.forEach((section, index) => {
+      if (section) {
+        const offsetTop = section.offsetTop;
+        const offsetHeight = section.offsetHeight;
+        if (
+          scrollPosition >= offsetTop &&
+          scrollPosition < offsetTop + offsetHeight
+        ) {
+          setActiveSection(navItems[index].id);
+        }
+      }
+    });
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 px-6 lg:px-10 py-4 flex items-center justify-between transition-all duration-300 bg-primary-dark/95 backdrop-blur-md shadow-lg
-        `}
+      className={`fixed top-0 left-0 right-0 z-50 px-6 lg:px-10 py-4 flex items-center justify-between transition-all duration-300 ${
+        isScrolled
+          ? "bg-primary-dark/95 backdrop-blur-md shadow-lg"
+          : "bg-transparent"
+      }`}
     >
       <div className="flex items-center gap-3 text-white font-semibold text-xl lg:text-2xl">
         <div className="bg-white p-2 size-12 lg:size-16 flex items-center justify-center shadow-xl rounded-2xl lg:rounded-3xl">
@@ -25,19 +63,22 @@ export default function HomeNavBar(){
       {/* Desktop Nav */}
       <nav className="hidden lg:flex items-center gap-8">
         {navItems.map((item) => (
-          <NavLink
+          <button
             key={item.id}
-            to={`/${item.id}`}
-            className={({ isActive }) =>
-              `cursor-pointer font-medium text-base transition-all duration-300 relative group ${
-                isActive
-                  ? "text-white "
-                  : "text-white/50 hover:text-white"
-              }`
-            }
+            onClick={() => scrollToSection(item.id)}
+            className={`cursor-pointer font-medium text-base transition-all duration-300 relative group ${
+              activeSection === item.id
+                ? "text-white"
+                : "text-white/70 hover:text-white"
+            }`}
           >
             {item.label}
-          </NavLink>
+            <span
+              className={`absolute -bottom-1 left-0 h-0.5 bg-green-400 transition-all duration-300 ${
+                activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"
+              }`}
+            />
+          </button>
         ))}
       </nav>
 
@@ -70,18 +111,17 @@ export default function HomeNavBar(){
         <div className="lg:hidden absolute top-full left-0 right-0 bg-primary-dark/98 backdrop-blur-md shadow-xl border-t border-white/10">
           <nav className="flex flex-col p-6 gap-4">
             {navItems.map((item) => (
-              <NavLink
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button
                 key={item.id}
-                to={`/${item.id}`}
-                className={({ isActive }) =>
-                  `cursor-pointer font-medium text-base transition-all duration-300 relative group ${
-                    isActive ? "text-white" : "text-white/70 hover:text-white"
-                  }`
-                }
+                onClick={() => scrollToSection(item.id)}
+                className={`text-left font-medium cursor-pointer text-lg py-2 transition-colors ${
+                  activeSection === item.id
+                    ? "text-white"
+                    : "text-white/70 hover:text-white"
+                }`}
               >
                 {item.label}
-              </NavLink>
+              </button>
             ))}
             <div className="border-t border-white/20 pt-4 mt-2 flex flex-col gap-3">
               <Link

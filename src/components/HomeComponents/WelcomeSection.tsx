@@ -1,83 +1,41 @@
 import { Heart } from "lucide-react";
 import { Link } from "react-router";
-// import { useState, useEffect } from "react";
-// import WelcomeFeature from "./WelcomeFeature";
-// import type { Feature } from "../../types/HomeCards";
+import WelcomeFeature from "./WelcomeFeature";
+import type { Feature } from "../../types/HomeCards";
 
-// const navItems = [
-//   { label: "Home", id: "home" },
-//   { label: "Services", id: "services" },
-//   { label: "Care", id: "care" },
-//   { label: "Activities", id: "activities" },
-//   // { label: "Get Started", id: "get-started" },
-// ];
-// const features: Feature[] = [
-//   {
-//     img: "family.png",
-//     title: "Family-Centered Care",
-//     description:
-//       "Collaborative tools connecting parents, children, and specialists in one unified platform",
-//     bg: "bg-linear-to-b from-blue-600 to-blue-400",
-//   },
-//   {
-//     img: "arrow.png",
-//     title: "Evidence-Based Therapy",
-//     description:
-//       "Research-backed methods for speech, motor skills, and cognitive development",
-//     bg: "bg-linear-to-b from-primary-dark to-green-700",
-//   },
-//   {
-//     img: "heart.png",
-//     title: "Specialized Support",
-//     description:
-//       "Resources and programs specifically designed for children with Down syndrome",
-//     bg: "bg-linear-to-b from-purple-600 to-purple-400",
-//   },
-// ];
+
+const features: Feature[] = [
+  {
+    img: "family.png",
+    title: "Family-Centered Care",
+    description:
+      "Collaborative tools connecting parents, children, and specialists in one unified platform",
+    bg: "bg-linear-to-b from-blue-600 to-blue-400",
+  },
+  {
+    img: "arrow.png",
+    title: "Evidence-Based Therapy",
+    description:
+      "Research-backed methods for speech, motor skills, and cognitive development",
+    bg: "bg-linear-to-b from-primary-dark to-green-700",
+  },
+  {
+    img: "heart.png",
+    title: "Specialized Support",
+    description:
+      "Resources and programs specifically designed for children with Down syndrome",
+    bg: "bg-linear-to-b from-purple-600 to-purple-400",
+  },
+];
 export default function WelcomeSection() {
-  // const [activeSection, setActiveSection] = useState("home");
-  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // const [isScrolled, setIsScrolled] = useState(false);
-
-  // const scrollToSection = (id: string) => {
-  //   const element = document.getElementById(id);
-  //   if (element) {
-  //     element.scrollIntoView({ behavior: "smooth" });
-  //   }
-  //   setIsMobileMenuOpen(false);
-  // };
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsScrolled(window.scrollY > 50);
-
-  //     const sections = navItems.map((item) => document.getElementById(item.id));
-  //     const scrollPosition = window.scrollY + 100;
-
-  //     sections.forEach((section, index) => {
-  //       if (section) {
-  //         const offsetTop = section.offsetTop;
-  //         const offsetHeight = section.offsetHeight;
-  //         if (
-  //           scrollPosition >= offsetTop &&
-  //           scrollPosition < offsetTop + offsetHeight
-  //         ) {
-  //           setActiveSection(navItems[index].id);
-  //         }
-  //       }
-  //     });
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+  
 
   return (
     <section
       id="home"
       className="min-h-screen relative  bg-linear-to-b from-primary-dark to-primary"
     >
-
+     
 
       {/* Spacer for fixed header */}
       <div className="h-20 lg:h-24" />
@@ -120,7 +78,7 @@ export default function WelcomeSection() {
           />
         </div>
       </section>
-      {/* <section className="not-md:w-10/12 mx-auto lg:absolute lg:-bottom-75 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  lg:gap-10 xl:gap-30 p-20 not-md:px-0">
+      <section className="not-md:w-10/12 mx-auto lg:absolute lg:-bottom-75 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5  lg:gap-10 xl:gap-30 p-20 not-md:px-0">
         {features.map((feature, index) => (
           <WelcomeFeature
             key={index}
@@ -130,7 +88,7 @@ export default function WelcomeSection() {
             bg={feature.bg}
           />
         ))}
-      </section> */}
+      </section>
     </section>
   );
 }
